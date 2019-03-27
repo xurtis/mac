@@ -32,9 +32,9 @@ impl<L: AccessLevel, T> Mac<L, T> {
     }
 }
 
-impl <L: AccessLevel + 'static, A: 'static> Mac<L, A> {
+impl <L: AccessLevel, A> Mac<L, A> {
     /// Map a value over an operation without an access level.
-    pub fn map_unchecked<B>(self, f: impl Fn(A) -> B + 'static) -> Mac<L, B> {
+    pub fn map_unchecked<B>(self, f: impl Fn(A) -> B) -> Mac<L, B> {
         let Mac { value, level } = self;
         Mac {
             value: f(value),
